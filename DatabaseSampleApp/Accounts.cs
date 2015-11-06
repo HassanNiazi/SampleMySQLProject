@@ -140,14 +140,48 @@ namespace DatabaseSampleApp
                 Adapter = new MySqlDataAdapter("select * from accounts where CNIC=" + double.Parse(UpdateCNICTB.Text), myConn);
                 Adapter.Fill(readerDataSet);
 
-                UpBalanceTB.Text = (string)readerDataSet.Tables[0].Rows[0].ItemArray[2];
-                UpAnnualPayTB.Text = (string)readerDataSet.Tables[0].Rows[0].ItemArray[3];
+                UpBalanceTB.Text = ((int)readerDataSet.Tables[0].Rows[0].ItemArray[2]).ToString();
+                UpAnnualPayTB.Text = ((int)readerDataSet.Tables[0].Rows[0].ItemArray[3]).ToString();
                 validDataForAccount = true;
             }
-            catch
+            catch(Exception ex)
             {
                 validDataForAccount = true;
-                MessageBox.Show("No Record for this CNIC", "Warning");
+                MessageBox.Show(ex.Message);
+                // MessageBox.Show("No Record for this CNIC", "Warning");
+            }
+        }
+
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            string query;
+            query = "UPDATE accounts SET Balance=" + UpBalanceTB.Text + ",AnnualPay=" + UpAnnualPayTB.Text+ " WHERE CNIC =" + UpdateCNICTB.Text;
+            executeQuery(query);
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult userActionForDeleteRecord = MessageBox.Show("Are you sure you want to delete record for CNIC: " + UpdateCNICTB.Text + ". This action cannot be reverted.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (userActionForDeleteRecord == DialogResult.Yes)
+            {
+                string query;
+                query = "Delete from accounts WHERE CNIC=" + UpdateCNICTB.Text;
+                executeQuery(query);
+            }
+        }
+
+        private void ShowAllAccountsButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataSet readerDataSet = new DataSet();
+                MySqlDataAdapter Adapter = new MySqlDataAdapter("select * from accounts", myConn);
+                Adapter.Fill(readerDataSet);
+                dataGridView1.DataSource = readerDataSet.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
             }
         }
     }

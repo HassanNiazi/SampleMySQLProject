@@ -82,11 +82,13 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 16);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(671, 431);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -248,6 +250,7 @@
             this.UpdateButton.TabIndex = 23;
             this.UpdateButton.Text = "Update";
             this.UpdateButton.UseVisualStyleBackColor = true;
+            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // label7
             // 
@@ -347,6 +350,7 @@
             this.DeleteButton.TabIndex = 2;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // statusStrip1
             // 
@@ -416,6 +420,7 @@
             this.ShowAllAccountsButton.TabIndex = 23;
             this.ShowAllAccountsButton.Text = "Show All Accounts";
             this.ShowAllAccountsButton.UseVisualStyleBackColor = true;
+            this.ShowAllAccountsButton.Click += new System.EventHandler(this.ShowAllAccountsButton_Click);
             // 
             // exitToolStripMenuItem
             // 
